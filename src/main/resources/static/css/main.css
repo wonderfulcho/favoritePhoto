@@ -1,0 +1,76 @@
+/* main.css */
+
+.mainStyle {
+    text-align: center;
+    overflow: auto;
+}
+
+.topContent {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 30px;
+}
+
+.topContent .contentTitle {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.photoBoard {
+    display: flex;
+    text-align: left;
+    margin: 0, auto;
+    top: 20%;
+    left: 0;
+    right: 0;
+}
+
+.item {
+    min-width: 400px;
+    max-width: 400px;
+    flex: 3;
+    margin: 20px;
+}
+
+.photoTitleImg {
+    width: 400px;
+    min-height: 300px;
+    max-height: 400px;
+    padding-right: 10px;
+}
+
+.photoTitle {
+    margin-top: -10px;
+}
+
+.photoTitle p {
+    margin-top: -20px;
+    font-size: 12px;
+}
+
+.photoButton {
+    text-align: left;
+}
+
+.photoButton {
+    text-align: center;
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    width: 100px;
+    height: 40px;
+}
+
+.photoButton:hover {
+    cursor: pointer;
+}
+
+.bottomContent {
+    position: absolute;
+    top: 80%;
+    left: 10%;
+}
+
+
