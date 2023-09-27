@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- headerFragment 선언 -->
+<div th:fragment="headerFragment">
+    <div class="headerStyle">
+        <img src="/img/menu.png" alt="memu" class="headerMenuBtn" id="headerMenuBtn" onclick="menuClick()">
+        <span class="headerTitle"> Favorite Photo </span>
+        <img src="/img/search.png" alt="search" class="headerSearchBtn" id="headerSearchBtn" onclick="searchClick()">
+
+        <div class="menu" id="menu">
+            <a href="/gallery/galleryMain">gallery</a>
+            <a href="/market/marketMain">market</a>
+            <a href="/member/login">login</a>
+            <a href="/member/join">join</a>
+        </div>
+
+        <div class="search" id="search">
+            <input type="text" placeholder="search" class="searchText">
+            <input type="button" value="search" class="searchBtn">
+        </div>
+    </div>
+</div>
+</html>
