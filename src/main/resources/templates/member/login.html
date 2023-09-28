@@ -6,9 +6,29 @@
 <head>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>login</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
-<body>
-
+<body layout:fragment="content">
+<form action="/member/login" method="post" id="joinForm">
+    <div class="loginContent">
+        <h1>로그인</h1>
+        <hr/>
+        <div class="loginEmail">
+            <h2>이메일</h2>
+            <input type="email" placeholder="id@email.com" id="email">
+        </div>
+        <div class="loginPassword">
+            <h2>비밀번호</h2>
+            <input type="password" placeholder="비밀번호">
+        </div>
+        <div class="loginButton">
+            <input type="submit" value="로그인하기" id="loginButton">
+            <br/>
+            <sapn>아직 아이디가 없으신가요?</sapn>
+            <a th:href="@{/member/join}">회원가입</a>
+        </div>
+    </div>
+</form>
 </body>
 </html>

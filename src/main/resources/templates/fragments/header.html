@@ -4,14 +4,14 @@
 <div th:fragment="headerFragment">
     <div class="headerStyle">
         <img src="/img/menu.png" alt="memu" class="headerMenuBtn" id="headerMenuBtn" onclick="menuClick()">
-        <span class="headerTitle"> Favorite Photo </span>
+        <a href="/main" class="headerTitle"> Favorite Photo </a>
         <img src="/img/search.png" alt="search" class="headerSearchBtn" id="headerSearchBtn" onclick="searchClick()">
 
         <div class="menu" id="menu">
-            <a href="/gallery/galleryMain">gallery</a>
-            <a href="/market/marketMain">market</a>
-            <a href="/member/login">login</a>
-            <a href="/member/join">join</a>
+            <a th:href="@{/gallery/galleryMain}">gallery</a>
+            <a th:href="@{/market/marketMain}">market</a>
+            <a th:href="@{/member/login}">login</a>
+            <a th:href="@{/member/join}">join</a>
         </div>
 
         <div class="search" id="search">

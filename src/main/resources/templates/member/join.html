@@ -4,11 +4,39 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/default_layout">
 <head>
-<head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>join</title>
+    <link rel="stylesheet" th:href="@{/css/join.css}">
+    <script type="text/javascript" th:src="@{/js/join.js}"></script>
 </head>
-<body>
-
+<body layout:fragment="content">
+<form th:action="@{/member/joinOk}" method="POST" onsubmit="return joinButtonClick()">
+    <div class="joinContent">
+        <h1>회원가입</h1>
+        <hr/>
+        <div class="joinEmail">
+            <h2>이메일</h2>
+            <input type="email" placeholder="id@email.com" name="email" id="email">
+        </div>
+        <div class="joinPassword">
+            <h2>비밀번호</h2>
+            <p>영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</p>
+            <input type="password" placeholder="비밀번호" name="password" id="password">
+            <h2>비밀번호 확인</h2>
+            <input type="password" placeholder="비밀번호 확인" name="passwordConfirm" id="passwordConfirm">
+        </div>
+        <div class="joinNickname">
+            <h2>닉네임</h2>
+            <p>다른 유저와 겹치지 않도록 입력해주세요.(2~15자)</p>
+            <input type="text" placeholder="별명 (2~15자)" name="nickname" id="nickname" minlength="2" maxlength="15">
+        </div>
+        <div class="joinButton">
+            <input type="submit" value="회원가입하기" id="joinButton">
+            <br/>
+            <span>이미 아이디가 있으신가요?</span>
+            <a th:href="@{/member/login}">로그인</a>
+        </div>
+    </div>
+</form>
 </body>
 </html>
