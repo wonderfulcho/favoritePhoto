@@ -8,16 +8,20 @@
         <img src="/img/search.png" alt="search" class="headerSearchBtn" id="headerSearchBtn" onclick="searchClick()">
 
         <div class="menu" id="menu">
-            <a th:href="@{/gallery/galleryMain}">gallery</a>
-            <a th:href="@{/market/marketMain}">market</a>
-            <a th:href="@{/member/login}">login</a>
-            <a th:href="@{/member/join}">join</a>
+            <div th:if="${session.loginMember == null}">
+                <a th:href="@{/gallery/galleryMain}">gallery</a>
+                <a th:href="@{/market/marketMain}">market</a>
+                <a th:href="@{/member/login}">login</a>
+                <a th:href="@{/member/join}">join</a>
+            </div>
+            <div th:if="${session.loginMember != null}">
+                <a th:href="@{/gallery/galleryMain}">gallery</a>
+                <a th:href="@{/market/marketMain}">market</a>
+                <a th:href="@{/member/myPage}">myPage</a>
+                <a th:href="@{/member/logout}">logout</a>
+            </div>
         </div>
 
-        <div class="search" id="search">
-            <input type="text" placeholder="search" class="searchText">
-            <input type="button" value="search" class="searchBtn">
-        </div>
     </div>
 </div>
 </html>

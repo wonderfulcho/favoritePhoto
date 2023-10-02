@@ -5,9 +5,78 @@
       layout:decorate="layouts/default_layout">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>gallery</title>
+    <link rel="stylesheet" th:href="@{/css/gallery.css}">
+    <script th:inline="javascript"> /*<![CDATA[*/ const loginMember = /*[[ ${loginMember} ]]*/ []; /*]]>*/ </script>
+    <script type="text/javascript" th:src="@{/js/gallery.js}"></script>
 </head>
-<body>
+<body layout:fragment="content">
+    <div class="galleryStyle">
+        <section class="galleryContent">
+            <div class="contentTitle">
+                <span> Gallery </span>
+                <a id="writeButton" onclick="writeButtonClick()">Write</a>
+            </div>
+            <div class="photoBoard">
+                <div class="item">
+                    <img src="/img/48520033.JPG" alt="img" class="photoTitleImg">
+                    <div class="photoTitle">
+                        <h2>[MP] leica mp a la carte</h2>
+                        <p>조서영 / 2023.09.27</p>
+                        <span>라이카 mp a la carte + summicron 35mm 4th + kodak Proimage 100</span> <br /><br />
+                        <button class="photoButton"> Read More </button>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/img/36540017.JPG" alt="img" class="photoTitleImg">
+                    <div class="photoTitle">
+                        <h2>[MP] leica mp a la carte</h2>
+                        <p>조서영 / 2023.09.27</p>
+                        <span>라이카 mp a la carte + summicron 35mm 4th + kodak Proimage 100</span> <br /><br />
+                        <button class="photoButton"> Read More </button>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/img/00570032.JPG" alt="img" class="photoTitleImg">
+                    <div class="photoTitle">
+                        <h2>[MP] leica mp a la carte</h2>
+                        <p>조서영 / 2023.09.27</p>
+                        <span>라이카 mp a la carte + summicron 35mm 4th + kodak Proimage 100</span> <br /><br />
+                        <button class="photoButton"> Read More </button>
+                    </div>
+                </div>
+            </div>
+            <div class="photoBoard">
+                <div class="item">
+                    <img src="/img/48520033.JPG" alt="img" class="photoTitleImg">
+                    <div class="photoTitle">
+                        <h2>[MP] leica mp a la carte</h2>
+                        <p>조서영 / 2023.09.27</p>
+                        <span>라이카 mp a la carte + summicron 35mm 4th + kodak Proimage 100</span> <br /><br />
+                        <button class="photoButton"> Read More </button>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/img/36540017.JPG" alt="img" class="photoTitleImg">
+                    <div class="photoTitle">
+                        <h2>[MP] leica mp a la carte</h2>
+                        <p>조서영 / 2023.09.27</p>
+                        <span>라이카 mp a la carte + summicron 35mm 4th + kodak Proimage 100</span> <br /><br />
+                        <button class="photoButton"> Read More </button>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/img/00570032.JPG" alt="img" class="photoTitleImg">
+                    <div class="photoTitle">
+                        <h2>[MP] leica mp a la carte</h2>
+                        <p>조서영 / 2023.09.27</p>
+                        <span>라이카 mp a la carte + summicron 35mm 4th + kodak Proimage 100</span> <br /><br />
+                        <button class="photoButton"> Read More </button>
+                    </div>
+                </div>
+            </div>
 
+        </section>
+    </div>
 </body>
 </html>

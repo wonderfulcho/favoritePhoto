@@ -4,31 +4,30 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/default_layout">
 <head>
-<head>
     <meta charset="UTF-8">
     <title>login</title>
     <link rel="stylesheet" th:href="@{/css/login.css}">
+    <script th:inline="javascript"> /*<![CDATA[*/ const memberList = /*[[ ${memberList} ]]*/ []; /*]]>*/ </script>
+    <script type="text/javascript" th:src="@{/js/login.js}"></script>
 </head>
 <body layout:fragment="content">
-<form action="/member/login" method="post" id="joinForm">
     <div class="loginContent">
         <h1>로그인</h1>
         <hr/>
         <div class="loginEmail">
             <h2>이메일</h2>
-            <input type="email" placeholder="id@email.com" id="email">
+            <input type="email" placeholder="id@email.com" id="email" name="email">
         </div>
         <div class="loginPassword">
             <h2>비밀번호</h2>
-            <input type="password" placeholder="비밀번호">
+            <input type="password" placeholder="비밀번호" id="password" name="password">
         </div>
         <div class="loginButton">
-            <input type="submit" value="로그인하기" id="loginButton">
+            <input type="button" value="로그인하기" id="loginButton" onclick="loginButtonClick()">
             <br/>
             <sapn>아직 아이디가 없으신가요?</sapn>
             <a th:href="@{/member/join}">회원가입</a>
         </div>
     </div>
-</form>
 </body>
 </html>
