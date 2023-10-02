@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const join = document.getElementById('joinButton');
 
-    function joinButtonClick() {
+    function joinButtonClick(event) {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const passwordConfirm = document.getElementById('passwordConfirm').value;
@@ -10,6 +10,23 @@ document.addEventListener('DOMContentLoaded', function() {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
         let showAlert = true;
+
+        for (const member of memberList) {
+            if (nickname === member.nickname) {
+                if (showAlert) {
+                    alert('중복된 닉네임입니다.');
+                    showAlert = false;
+                }
+                event.preventDefault();
+            }
+            if (email === member.email) {
+                if (showAlert) {
+                    alert('중복된 이메일입니다.');
+                    showAlert = false;
+                }
+                event.preventDefault();
+            }
+        }
 
         if (!emailPattern.test(email)) {
             if (showAlert) {
@@ -31,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
         } else if (password.length < 8) {
             if (showAlert) {
-                alert('유요한 비밀번호 형식이 아닙니다.');
+                alert('유효한 비밀번호 형식이 아닙니다.');
                 showAlert = false;
             }
             event.preventDefault();
@@ -54,6 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('닉네임은 2~15자여야 합니다.');
             }
             event.preventDefault();
+        }
+        if (showAlert) {
+            alert('회원가입이 완료되었습니다.');
         }
     }
 

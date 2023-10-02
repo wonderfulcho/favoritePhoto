@@ -1,11 +1,9 @@
-/* main.css */
-
-.mainStyle {
+.galleryStyle {
     text-align: center;
     overflow: auto;
 }
 
-.topContent {
+.galleryContent {
     position: absolute;
     top: 15%;
     left: 50%;
@@ -13,7 +11,7 @@
     margin-bottom: 30px;
 }
 
-.topContent .contentTitle {
+.galleryContent .contentTitle {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
@@ -24,6 +22,12 @@
     margin-left: 20px;
     font-size: 25px;
     font-weight: bold;
+}
+
+.contentTitle a {
+    text-align: right;
+    margin-right: 20px;
+    font-size: 20px;
 }
 
 .photoBoard {
@@ -74,11 +78,3 @@
 .photoButton:hover {
     cursor: pointer;
 }
-
-.bottomContent {
-    position: absolute;
-    top: 80%;
-    left: 10%;
-}
-
-

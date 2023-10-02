@@ -19,4 +19,13 @@ public class MemberEntity {
     private String email;
     private String password;
     private String nickname;
+
+    public MemberDTO toDTO() {
+        return MemberDTO.builder()
+                .id(id)
+                .email(email)
+                .password(password)
+                .nickname(nickname)
+                .build();
+    }
 }

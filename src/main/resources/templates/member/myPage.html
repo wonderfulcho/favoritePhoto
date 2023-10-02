@@ -4,11 +4,47 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/default_layout">
 <head>
-<head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/myPage.css}">
+    <script type="text/javascript" th:src="@{/js/myPage.js}"></script>
 </head>
-<body>
+<body layout:fragment="content">
+    <div class="myPageContent">
+        <h1><a>내가 쓴 글</a> | <a>회원정보</a></h1>
+        <hr/>
+        <div class="myBoard" id="myBoard">
 
+
+        </div>
+
+        <div class="memberUpdate">
+            <div class="updateEmail">
+                <h2>이메일</h2>
+                <input type="hidden" th:value="${session.loginMember.id}" name="id" id="id">
+                <input type="email" th:value="${session.loginMember.email}" name="email" id="email" readonly>
+            </div>
+            <div class="updateNickname">
+                <h2>닉네임</h2>
+                <p>다른 유저와 겹치지 않도록 입력해주세요.(2~15자)</p>
+                <input type="text" th:value="${session.loginMember.nickname}" name="nickname" id="nickname" minlength="2" maxlength="15">
+            </div>
+            <div class="updatePassword">
+                <h2> 비밀번호 </h2>
+                <p>영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</p>
+                <input type="password" placeholder="비밀번호" name="password" id="password">
+                <h2> 수정 할 비밀번호</h2>
+                <p>영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</p>
+                <input type="password" placeholder="비밀번호" name="newPassword" id="newPassword">
+                <h2>비밀번호 확인</h2>
+                <input type="password" placeholder="비밀번호 확인" name="passwordConfirm" id="passwordConfirm">
+            </div>
+            <div class="updateButton">
+                <input type="button" value="뒤로가기" id="backButton">
+                <input type="button" value="수정하기" id="updateButton" onclick="updateButtonClick()">
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>
