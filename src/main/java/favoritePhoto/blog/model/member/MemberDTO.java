@@ -12,17 +12,10 @@ import org.springframework.stereotype.Component;
 @Setter
 @ToString
 public class MemberDTO {
-    private Long id;
-    private String email;
-    private String password;
-    private String nickname;
-
-
-    public MemberDTO(String email, String password, String nickname) {
-        this.email = email;
-        this.password = password;
-        this.nickname = nickname;
-    }
+    private Long id;            // PK
+    private String email;       // 이메일
+    private String password;    // 비밀번호
+    private String nickname;    // 닉네임
 
     public MemberEntity toEntity() {
         return MemberEntity.builder()

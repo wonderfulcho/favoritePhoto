@@ -7,8 +7,27 @@
 <head>
     <meta charset="UTF-8">
     <title>write</title>
+    <link rel="stylesheet" th:href="@{/css/write.css}">
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/write.js}"></script>
 </head>
 <body layout:fragment="content">
+    <div class="writeContent">
+        <div class="title">
+            <span id="title">제목</span>
+            <input type="text" placeholder="제목을 입력하세요." name="title">
+            <span id="writer">작성자</span>
+        </div>
+        <div class="content">
+            <div id="editor"></div>
+        </div>
+        <div class="button">
+            <input type="submit" value="등록">
+        </div>
 
+    </div>
 </body>
 </html>
