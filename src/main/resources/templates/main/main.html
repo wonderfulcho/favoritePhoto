@@ -7,39 +7,25 @@
     <meta charset="UTF-8">
     <title>Favorite Photo</title>
     <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script th:inline="javascript"> /*<![CDATA[*/ const imageUrls = /*[[ ${imageUrls} ]]*/ []; /*]]>*/ </script>
+    <script type="text/javascript" th:src="@{/js/gallery.js}"></script>
 </head>
 <body layout:fragment="content">
     <div class="mainStyle">
         <section class="topContent">
             <div class="contentTitle">
-                <span> Gallery </span>
+                <a th:href="@{/gallery/galleryMain}">Gallery</a>
             </div>
             <div class="photoBoard">
-                <div class="item">
-                    <img src="/img/48520033.JPG" alt="img" class="photoTitleImg">
-                    <div class="photoTitle">
-                        <h2>[MP] leica mp a la carte</h2>
-                        <p>조서영 / 2023.09.27</p>
-                        <span>라이카 mp a la carte + summicron 35mm 4th + kodak Proimage 100</span> <br /><br />
-                        <button class="photoButton"> Read More </button>
+                <div th:each="galleryItem, iterStat : ${page}" class="item">
+                    <div th:if="${imageUrls.size() > iterStat.index}">
+                        <img th:src="${imageUrls[__${iterStat.index}__]}" alt="img" class="photoTitleImg">
                     </div>
-                </div>
-                <div class="item">
-                    <img src="/img/36540017.JPG" alt="img" class="photoTitleImg">
                     <div class="photoTitle">
-                        <h2>[MP] leica mp a la carte</h2>
-                        <p>조서영 / 2023.09.27</p>
-                        <span>라이카 mp a la carte + summicron 35mm 4th + kodak Proimage 100</span> <br /><br />
-                        <button class="photoButton"> Read More </button>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="/img/00570032.JPG" alt="img" class="photoTitleImg">
-                    <div class="photoTitle">
-                        <h2>[MP] leica mp a la carte</h2>
-                        <p>조서영 / 2023.09.27</p>
-                        <span>라이카 mp a la carte + summicron 35mm 4th + kodak Proimage 100</span> <br /><br />
-                        <button class="photoButton"> Read More </button>
+                        <h2 th:text="${galleryItem.title}"></h2>
+                        <p th:if="${galleryItem.modifiedDate == null}" th:text="${galleryItem.nickname} + ' / ' + ${#strings.replace(galleryItem.createDate, 'T', ' ')}"></p>
+                        <p th:if="${galleryItem.modifiedDate != null}" th:text="${galleryItem.nickname} + ' / ' + ${#strings.replace(galleryItem.modifiedDate, 'T', ' ')} + '(수정됨)'"></p>
+                        <button class="photoButton" id="readMore" th:data-id="${galleryItem.id}">Read More</button>
                     </div>
                 </div>
             </div>
@@ -47,7 +33,7 @@
             <hr/>
 
             <div class="contentTitle">
-                <span> Market </span>
+                <a th:href="@{/market/marketMain}">Market</a>
             </div>
             <div class="photoBoard">
                 <div class="item">

@@ -42,3 +42,5 @@
     color: lightgray;
     margin-top: -15px;
 }
+
+input:hover { cursor: pointer; }

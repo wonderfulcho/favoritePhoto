@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-@SessionAttributes("loginMember")
 @RequestMapping("/member")
 @Controller
 public class MemberController {
@@ -58,7 +57,7 @@ public class MemberController {
 
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpSession session) {
+    public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/main";
     }

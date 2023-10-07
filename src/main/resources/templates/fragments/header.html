@@ -3,25 +3,18 @@
 <!-- headerFragment 선언 -->
 <div th:fragment="headerFragment">
     <div class="headerStyle">
-        <img src="/img/menu.png" alt="memu" class="headerMenuBtn" id="headerMenuBtn" onclick="menuClick()">
+        <a th:href="@{/gallery/galleryMain}" class="menu">gallery</a>
+        <a th:href="@{/market/marketMain}" class="menu">market</a>
+
         <a href="/main" class="headerTitle"> Favorite Photo </a>
-        <img src="/img/search.png" alt="search" class="headerSearchBtn" id="headerSearchBtn" onclick="searchClick()">
 
-        <div class="menu" id="menu">
-            <div th:if="${session.loginMember == null}">
-                <a th:href="@{/gallery/galleryMain}">gallery</a>
-                <a th:href="@{/market/marketMain}">market</a>
-                <a th:href="@{/member/login}">login</a>
-                <a th:href="@{/member/join}">join</a>
-            </div>
-            <div th:if="${session.loginMember != null}">
-                <a th:href="@{/gallery/galleryMain}">gallery</a>
-                <a th:href="@{/market/marketMain}">market</a>
-                <a th:href="@{/member/myPage}">myPage</a>
-                <a th:href="@{/member/logout}">logout</a>
-            </div>
-        </div>
+        <a th:href="@{/member/login}" th:if="${session.loginMember == null}" class="member">login</a>
+        <a th:href="@{/member/join}" th:if="${session.loginMember == null}" class="member">join</a>
 
+        <a th:href="@{/member/myPage}" th:if="${session.loginMember != null}" class="member">myPage</a>
+        <a th:href="@{/member/logout}" th:if="${session.loginMember != null}" class="member">logout</a>
+
+        </form>
     </div>
 </div>
 </html>

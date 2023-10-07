@@ -26,3 +26,5 @@
     background-color: black;
     color: white;
 }
+
+#loginButton:hover { cursor: pointer; }

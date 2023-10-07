@@ -24,6 +24,16 @@ body {
     top: 40%;
 }
 
+.headerStyle .menu {
+    position: relative;
+    right: 470px;
+}
+
+.headerStyle .member {
+    position: relative;
+    left: 430px;
+}
+
 .headerMenuBtn {
     width: 25px;
     position: relative;
@@ -36,13 +46,6 @@ body {
     position: relative;
     top: 40%;
     left: 35%;
-}
-
-.menu {
-    position: relative;
-    top: 50%;
-    right: 35%;
-    display: none;
 }
 
 .search {

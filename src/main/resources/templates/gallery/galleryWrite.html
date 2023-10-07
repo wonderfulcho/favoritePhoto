@@ -4,7 +4,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/default_layout">
 <head>
-<head>
     <meta charset="UTF-8">
     <title>write</title>
     <link rel="stylesheet" th:href="@{/css/write.css}">
@@ -15,19 +14,23 @@
     <script type="text/javascript" th:src="@{/js/write.js}"></script>
 </head>
 <body layout:fragment="content">
+<form action="/gallery/save" method="post" id="save">
     <div class="writeContent">
         <div class="title">
             <span id="title">제목</span>
             <input type="text" placeholder="제목을 입력하세요." name="title">
-            <span id="writer">작성자</span>
+            <span id="writer">작성자 </span> <span th:text="${session.loginMember.nickname}"></span>
         </div>
         <div class="content">
-            <div id="editor"></div>
+            <textarea id="editor" name="content"></textarea>
         </div>
         <div class="button">
+            <input type="hidden" name="nickname" th:value="${session.loginMember.nickname}">
+            <input type="hidden" name="hits" value="0">
+            <input type="hidden" name="deleteYn" value="n">
             <input type="submit" value="등록">
         </div>
-
     </div>
+</form>
 </body>
 </html>

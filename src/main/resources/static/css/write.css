@@ -30,3 +30,5 @@
 }
 
 .ck-editor__editable { height: 800px; }
+
+.button:hover { cursor: pointer; }

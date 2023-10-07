@@ -7,10 +7,11 @@
 
 .topContent {
     position: absolute;
-    top: 15%;
+    top: 20%;
     left: 50%;
     transform: translateX(-50%);
     margin-bottom: 30px;
+    width: 1340px;
 }
 
 .topContent .contentTitle {
@@ -19,11 +20,13 @@
     justify-content: space-between;
 }
 
-.contentTitle span {
+.contentTitle a {
     text-align: left;
     margin-left: 20px;
     font-size: 25px;
     font-weight: bold;
+    text-decoration: none;
+    color: black;
 }
 
 .photoBoard {
