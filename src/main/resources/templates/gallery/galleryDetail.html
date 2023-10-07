@@ -4,11 +4,45 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/default_layout">
 <head>
-<head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>detail</title>
+    <link rel="stylesheet" th:href="@{/css/gallery.css}">
+    <script th:inline="javascript"> /*<![CDATA[*/
+    const loginMember = /*[[ ${loginMember} ]]*/ [];
+    const replyList = /*[[ ${replyList} ]]*/ [];
+    /*]]>*/ </script>
+    <script type="text/javascript" th:src="@{/js/gallery.js}"></script>
 </head>
-<body>
-
+<body layout:fragment="content">
+    <div class="detailContent">
+        <input type="hidden" id="galleryID" name="galleryID" th:value="${item.id}" >
+        <h1 th:text="${item.title}"></h1>
+        <p th:if="${item.modifiedDate == null}" th:text="${item.nickname} + ' / ' + ${#strings.replace(item.createDate, 'T', ' ')}"></p>
+        <p th:if="${item.modifiedDate != null}" th:text="${item.nickname} + ' / ' + ${#strings.replace(item.modifiedDate, 'T', ' ')} + '(수정됨)'"></p>
+        <hr />
+        <div th:utext="${item.content}" class="itemContent"></div>
+        <div th:if="${session != null}">
+            <div th:if="${item.nickname eq (session?.loginMember?.nickname ?: '')}" class="galleryButton">
+                <button id="galleryUpdate" th:data-id="${item.id}">수정</button>
+                <button id="galleryDelete" th:data-id="${item.id}">삭제</button>
+            </div>
+        </div>
+        <hr />
+        <div class="reply">
+            <h2> 댓글 </h2>
+            <div th:each="reply : ${replyList}" class="replyView">
+                <span th:text="${reply.nickname} + ' | ' + ${reply.content}"></span>
+                <button th:if="${loginMember != null and reply.nickname eq loginMember.nickname}" id="replyDelete" th:data-id="${reply.id}">삭제</button>
+            </div>
+            <form th:action="@{/gallery/galleryReply}" method="post">
+                <input type="text" name="content" placeholder="댓글을 입력해주세요." id="replyText" >
+                <input type="submit" value="입력" id="replySubmit">
+                <div th:if="${loginMember != null}">
+                    <input type="hidden" name="nickname" th:value="${loginMember.nickname}">
+                </div>
+                <input type="hidden" name="galleryID" th:value="${item.id}">
+            </form>
+        </div>
+    </div>
 </body>
 </html>

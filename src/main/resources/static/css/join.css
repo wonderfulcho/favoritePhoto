@@ -34,3 +34,5 @@
     color: lightgray;
     margin-top: -15px;
 }
+
+#joinButton:hover { cursor: pointer; }

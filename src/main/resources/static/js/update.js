@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 isImageInserted = content.includes('<img'); // 이미지 태그가 포함되어 있는지 확인
             });
 
-            const form = document.getElementById('save');
+            const form = document.getElementById('update');
             form.addEventListener('submit', function(event) {
                 const titleInput = document.querySelector('input[name="title"]');
                 if (!titleInput.value.trim()) {
@@ -36,5 +36,3 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error(error);
         });
 });
-
-
