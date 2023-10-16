@@ -43,9 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (replyForm != null) {
         replyForm.addEventListener('submit', function(event) {
             const replyText = document.getElementById('replyText').value;
-            if (!loginMember) {
+            if (loginMember == null) {
                 event.preventDefault();
-                alert('로그인이 필요합니다.');
+                alert('로그인이 필요합니다~~~');
             } else if (!replyText.trim()) {
                 event.preventDefault();
                 alert('댓글을 입력해주세요.');

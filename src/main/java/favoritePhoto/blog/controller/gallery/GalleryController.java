@@ -40,6 +40,8 @@ public class GalleryController {
         model.addAttribute("page", page);
         model.addAttribute("previous", page.hasPrevious() ? page.previousPageable().getPageNumber() : -1);
         model.addAttribute("next", page.hasNext() ? page.nextPageable().getPageNumber() : page.getTotalPages());
+        model.addAttribute("startPage", page.getNumber() / 10 * 10);
+        model.addAttribute("endPage", Math.min(page.getNumber() / 10 * 10 + 9, page.getTotalPages() - 1));
         model.addAttribute("loginMember", session.getAttribute("loginMember"));
 
         // 페이지의 GalleryEntity 레코드들에서 이미지 URL 추출
@@ -85,12 +87,15 @@ public class GalleryController {
 
     /* 갤러리 글 상세 조회 */
     @GetMapping("/galleryDetail")
-    public void galleryDetail(@RequestParam Long id, Model model) {
+    public void galleryDetail(@RequestParam Long id, Model model, HttpSession session) {
         GalleryDTO galleryDTO = galleryService.galleryDetail(id);
         List<ReplyDTO> replyDTOList = galleryService.replyDTOList(id);
 
         model.addAttribute("item", galleryDTO);
         model.addAttribute("replyList", replyDTOList);
+        model.addAttribute("loginMember", session.getAttribute("loginMember"));
+
+        System.out.println("session = " + session.getAttribute("loginMember"));
     }
 
     /* 게시글 수정 페이지 */

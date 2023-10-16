@@ -3,14 +3,13 @@ package favoritePhoto.blog.controller.member;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import favoritePhoto.blog.model.member.MemberDTO;
-import favoritePhoto.blog.service.member.MemberServiceImpl;
+import favoritePhoto.blog.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +19,7 @@ import java.util.Map;
 public class MemberController {
 
     @Autowired
-    private MemberServiceImpl memberService;
+    private MemberService memberService;
 
     @GetMapping("/join")
     public String joinPage(Model model) {

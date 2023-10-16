@@ -1,0 +1,60 @@
+.marketStyle {
+    text-align: center;
+    overflow: auto;
+}
+
+.marketContent {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 30px;
+    width: 1340px;
+}
+
+.marketContent .contentTitle {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contentTitle span {
+    text-align: left;
+    margin-left: 20px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+.marketBoard {
+    display: flex;
+    flex-wrap: wrap; /* 줄바꿈을 허용하는 속성 */
+    text-align: left;
+    margin: 0, auto;
+    top: 20%;
+    left: 0;
+    right: 0;
+}
+
+.item {
+    min-width: 400px;
+    max-width: 400px;
+    flex: 3;
+    margin: 20px;
+    box-sizing: border-box;
+}
+
+.marketTitleImg {
+    width: 400px;
+    height: 400px;
+    padding-right: 10px;
+}
+
+.marketTitle {
+    margin-top: -10px;
+    text-align: center;
+}
+
+.pageNation {
+    margin-bottom: 20px;
+}

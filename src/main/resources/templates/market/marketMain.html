@@ -4,11 +4,43 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/default_layout">
 <head>
-<head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Market</title>
+    <link rel="stylesheet" th:href="@{/css/market.css}">
 </head>
-<body>
+<body layout:fragment="content">
+    <div class="marketStyle">
+        <section class="marketContent">
+            <div class="contentTitle">
+                <span> Market </span>
+            </div>
+            <div class="marketBoard">
+                <div th:each="marketItem : ${page}" class="item">
+                    <a th:href="${marketItem.homepageUrl}" target="_blank">
+                        <img th:src="${marketItem.imgUrl}" alt="img" class="marketTitleImg">
+                        <div class="marketTitle">
+                           <p th:text="${marketItem.title}"></p>
+                           <p th:text="${marketItem.price}"></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <br />
+            <div class="pageNation">
+                <th:block th:if="${previous >= 0}">
+                    <a th:href="@{'/market/marketMain?page=' + ${previous}}">◀︎</a>
+                </th:block>
+                <th:block th:each="i : ${#numbers.sequence(startPage, endPage)}">
+                    <span th:if="${i == page.number}" th:text="${i + 1}" style="text-decoration: underline;"></span>
+                    <a th:unless="${i == page.number}" th:href="@{'/market/marketMain?page=' + ${i}}">[[${i + 1}]]</a>
+                </th:block>
+                <th:block th:if="${next < page.totalPages}">
+                    <a th:href="@{'/market/marketMain?page=' + ${next}}">▶︎</a>
+                </th:block>
+            </div>
+            <br />
+        </section>
+    </div>
 
 </body>
 </html>

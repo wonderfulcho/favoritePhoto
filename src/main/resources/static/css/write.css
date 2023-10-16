@@ -10,11 +10,13 @@
 
 .writeContent .title{
     font-weight: bold;
+    font-size: 20px;
     margin-bottom: 10px;
 }
 
 .writeContent input {
-    width: 80%
+    width: 80%;
+    height: 30px;
 }
 
 .writeContent .button {
@@ -31,4 +33,4 @@
 
 .ck-editor__editable { height: 800px; }
 
-.button:hover { cursor: pointer; }
+#submit:hover { cursor: pointer; }

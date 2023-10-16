@@ -36,14 +36,15 @@
                 <th:block th:if="${previous >= 0}">
                     <a th:href="@{'/gallery/galleryMain?page=' + ${previous}}">◀︎</a>
                 </th:block>
-                <th:block th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
-                    <span th:if="${i == page.number}" th:text="${i + 1}"></span>
+                <th:block th:each="i : ${#numbers.sequence(startPage, endPage)}">
+                    <span th:if="${i == page.number}" th:text="${i + 1}" style="text-decoration: underline;"></span>
                     <a th:unless="${i == page.number}" th:href="@{'/gallery/galleryMain?page=' + ${i}}">[[${i + 1}]]</a>
                 </th:block>
                 <th:block th:if="${next < page.totalPages}">
                     <a th:href="@{'/gallery/galleryMain?page=' + ${next}}">▶︎</a>
                 </th:block>
             </div>
+            <br />
         </section>
     </div>
 </body>
