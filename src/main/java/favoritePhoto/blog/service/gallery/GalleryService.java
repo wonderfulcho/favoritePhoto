@@ -35,14 +35,7 @@ public class GalleryService {
         galleryDTO.setCreateDate(LocalDateTime.now());
         GalleryEntity galleryEntity = galleryDTO.toEntity();
 
-        GalleryEntity updateEntity = GalleryEntity.builder()
-                .id(galleryEntity.getId())
-                .title(galleryDTO.getTitle())
-                .content(galleryDTO.getContent())
-                .modifiedDate(galleryDTO.getModifiedDate())
-                .build();
-
-        galleryRepository.save(updateEntity);
+        galleryRepository.save(galleryEntity);
     }
 
     /* 갤러리 글 수정 */

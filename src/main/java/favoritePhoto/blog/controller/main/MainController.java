@@ -1,8 +1,9 @@
 package favoritePhoto.blog.controller.main;
 
-import favoritePhoto.blog.model.gallery.GalleryDTO;
 import favoritePhoto.blog.model.gallery.GalleryEntity;
+import favoritePhoto.blog.model.market.MarketDTO;
 import favoritePhoto.blog.service.gallery.GalleryService;
+import favoritePhoto.blog.service.market.MarketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,29 +23,31 @@ import java.util.regex.Pattern;
 public class MainController {
 
     private final GalleryService galleryService;
+    private final MarketService marketService;
 
     @Autowired
-    public MainController(GalleryService galleryService) { this.galleryService = galleryService; }
+    public MainController(GalleryService galleryService, MarketService marketService) {
+        this.galleryService = galleryService;
+        this.marketService = marketService;
+    }
 
     @GetMapping("/main")
     public String mainPage(HttpSession session, Model model,
                            @PageableDefault(page = 0, size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<GalleryEntity> page = galleryService.pageList(pageable);
-        model.addAttribute("page", page);
 
-        // 페이지의 GalleryEntity 레코드들에서 이미지 URL 추출
+        /* 갤러리 페이지 */
+        Page<GalleryEntity> galleryPage = galleryService.pageList(pageable);
+        model.addAttribute("gallery", galleryPage);
+
         List<String> imageUrls = new ArrayList<>();
         // 페이지의 GalleryEntity 레코드들 확인
-        List<GalleryEntity> galleryEntities = page.getContent();
+        List<GalleryEntity> galleryEntities = galleryPage.getContent();
         for (GalleryEntity galleryEntity : galleryEntities) {
             String htmlContent = galleryEntity.getContent();
-            // 정규식 패턴
-            String imgTagPattern = "<img\\s+[^>]*src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>";
-            // 정규식 매치
+            String imgTagPattern = "<img\\s+[^>]*src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>"; // 정규식 패턴
             Pattern pattern = Pattern.compile(imgTagPattern);
             Matcher matcher = pattern.matcher(htmlContent);
-            // 첫 번째 매치된 이미지 태그 추출
-            if (matcher.find()) {
+            if (matcher.find()) { // 첫 번째 매치된 이미지 태그 추출
                 String imgUrl = matcher.group(1);
                 imageUrls.add(imgUrl);
             } else {
@@ -54,6 +57,12 @@ public class MainController {
 
         // 이미지 URL 리스트를 모델에 추가
         model.addAttribute("imageUrls", imageUrls);
+
+
+        /* 마켓 페이지 */
+        Page<MarketDTO> marketPage = marketService.getCrawledDataByPage(pageable);
+        model.addAttribute("market", marketPage);
+
 
         return "main/main";
     }

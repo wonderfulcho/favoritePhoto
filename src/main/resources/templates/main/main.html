@@ -17,7 +17,7 @@
                 <a th:href="@{/gallery/galleryMain}">Gallery</a>
             </div>
             <div class="photoBoard">
-                <div th:each="galleryItem, iterStat : ${page}" class="item">
+                <div th:each="galleryItem, iterStat : ${gallery}" class="item">
                     <div th:if="${imageUrls.size() > iterStat.index}">
                         <img th:src="${imageUrls[__${iterStat.index}__]}" alt="img" class="photoTitleImg">
                     </div>
@@ -35,33 +35,15 @@
             <div class="contentTitle">
                 <a th:href="@{/market/marketMain}">Market</a>
             </div>
-            <div class="photoBoard">
-                <div class="item">
-                    <img src="/img/i-img1200x797-1668359679see7e7142563.jpg" alt="img" class="photoTitleImg">
-                    <div class="photoTitle">
-                        <h2>leica mp a la carte 판매합니다.</h2>
-                        <p>조서영 / 2023.09.27</p>
-                        <span>라이카 mp a la carte 판매합니다. 가격은 </span> <br /><br />
-                        <button class="photoButton"> Read More </button>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="/img/IMG_1469.JPG" alt="img" class="photoTitleImg">
-                    <div class="photoTitle">
-                        <h2>leica mp a la carte 판매합니다.</h2>
-                        <p>조서영 / 2023.09.27</p>
-                        <span>라이카 mp a la carte 판매합니다. 가격은 </span> <br /><br />
-                        <button class="photoButton"> Read More </button>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="/img/IMG_0564 크게.jpeg" alt="img" class="photoTitleImg">
-                    <div class="photoTitle">
-                        <h2>leica mp a la carte 판매합니다.</h2>
-                        <p>조서영 / 2023.09.27</p>
-                        <span>라이카 mp a la carte 판매합니다. 가격은 </span> <br /><br />
-                        <button class="photoButton"> Read More </button>
-                    </div>
+            <div class="marketBoard">
+                <div th:each="marketItem : ${market}" class="item">
+                    <a th:href="${marketItem.homepageUrl}" target="_blank">
+                        <img th:src="${marketItem.imgUrl}" alt="img" class="marketTitleImg">
+                        <div class="marketTitle">
+                            <p th:text="${marketItem.title}"></p>
+                            <p th:text="${marketItem.price}"></p>
+                        </div>
+                    </a>
                 </div>
             </div>
             <br/>

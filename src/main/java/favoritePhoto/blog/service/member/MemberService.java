@@ -2,21 +2,139 @@ package favoritePhoto.blog.service.member;
 
 import favoritePhoto.blog.model.member.MemberDTO;
 import favoritePhoto.blog.model.member.MemberEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import favoritePhoto.blog.repository.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public interface MemberService {
+@Service
+public class MemberService {
 
-    public void memberDTOJoin(@ModelAttribute MemberDTO memberDTO);
+    @Autowired
+    private MemberRepository memberRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public List<MemberDTO> memberDTOList();
+    @Transactional
+    public void memberDTOJoin(MemberDTO memberDTO) {
+        // 비밀번호를 BCrypt로 해시화하여 저장
+        String hashedPassword = passwordEncoder.encode(memberDTO.getPassword());
+        memberDTO.setPassword(hashedPassword);
 
-    public MemberDTO memberDTOByEmail(@RequestParam String email);
+        MemberEntity memberEntity = memberDTO.toEntity();
+        memberRepository.save(memberEntity);
+    }
 
-    public int memberDTOUpdate(@RequestBody MemberDTO memberDTO,
-                               @RequestParam String newPassword,
-                               @RequestParam String passwordConfirm);
+    @Transactional
+    public List<MemberDTO> memberDTOList() {
+        List<MemberEntity> memberEntityList = memberRepository.findAll();
+        List<MemberDTO> memberDTOList = new ArrayList<>();
+
+        for (MemberEntity memberEntity : memberEntityList) {
+            MemberDTO memberDTO = MemberDTO.builder()
+                    .id(memberEntity.getId())
+                    .email(memberEntity.getEmail())
+                    .password(memberEntity.getPassword())
+                    .nickname(memberEntity.getNickname())
+                    .build();
+            memberDTOList.add(memberDTO);
+        }
+        return memberDTOList;
+    }
+
+    @Transactional
+    public MemberDTO memberDTOByEmail(String email) {
+        MemberEntity memberEntity = memberRepository.findByEmail(email);
+        MemberDTO memberDTO = MemberDTO.builder()
+                .id(memberEntity.getId())
+                .email(memberEntity.getEmail())
+                .nickname(memberEntity.getNickname())
+                .password(memberEntity.getPassword())
+                .build();
+        return memberDTO;
+    }
+
+    @Transactional
+    public String memberLogin(String email, String password) {
+        List<MemberEntity> memberEntityList = memberRepository.findAll();
+        List<MemberDTO> memberDTOList = new ArrayList<>();
+
+        for (MemberEntity memberEntity : memberEntityList) {
+            MemberDTO memberDTO = MemberDTO.builder()
+                    .id(memberEntity.getId())
+                    .email(memberEntity.getEmail())
+                    .password(memberEntity.getPassword())
+                    .nickname(memberEntity.getNickname())
+                    .build();
+            memberDTOList.add(memberDTO);
+        }
+
+        for (MemberDTO memberDTO : memberDTOList) {
+            if (email.equals(memberDTO.getEmail()) && passwordEncoder.matches(password, memberDTO.getPassword())) {
+                return email;
+            }
+        }
+        return null;
+    }
+
+    @Transactional
+    public int memberDTOUpdate(MemberDTO memberDTO, String newPassword, String passwordConfirm) {
+
+        int check = 0;
+
+        List<MemberEntity> memberEntityList = memberRepository.findAll();
+        List<MemberDTO> memberDTOList = new ArrayList<>();
+        for (MemberEntity m : memberEntityList) {
+            MemberDTO member = MemberDTO.builder()
+                    .id(m.getId())
+                    .email(m.getEmail())
+                    .password(m.getPassword())
+                    .nickname(m.getNickname())
+                    .build();
+            memberDTOList.add(member);
+        }
+
+        MemberEntity memberEntity = memberRepository.findByEmail(memberDTO.getEmail());
+        MemberDTO memberPasswordCheck = memberEntity.toDTO();
+
+        if (!passwordEncoder.matches(memberDTO.getPassword(), memberPasswordCheck.getPassword())) {
+            System.out.println("기존 비밀번호 다름");
+            check = 1;
+        } else if (memberPasswordCheck.getPassword().equals(memberDTO.getPassword())) {
+            if (newPassword != null && !newPassword.equals(passwordConfirm)) {
+                System.out.println("새로운 비밀번호와 비밀번호 확인 값 다름");
+                check = 1;
+            } else if (memberDTO.getNickname() == null) {
+                System.out.println("닉네임을 입력하세요.");
+                check = 3;
+            } else if (memberDTO.getNickname().length() < 2 || memberDTO.getNickname().length() > 15) {
+                System.out.println("닉네임은 2~15자여야 합니다. ");
+                check = 4;
+            } else {
+                System.out.println("기존 비밀번호 같음");
+                check = 5;
+                MemberEntity entity = memberDTO.toEntity();
+                memberRepository.save(entity);
+            }
+
+            for (MemberDTO member : memberDTOList) {
+                if (member.getNickname().equals(memberDTO.getNickname()) && !member.getEmail().equals(memberDTO.getEmail())) {
+                    System.out.println("닉네임 중복되서 변경 실패");
+                    check = 2;
+                }
+            }
+
+            if (newPassword != null && newPassword.length() >= 8 && newPassword.equals(passwordConfirm)) {
+                System.out.println("새로운 비밀번호로 비밀번호 변경");
+                memberDTO.setPassword(newPassword);
+                MemberEntity entity = memberDTO.toEntity();
+                memberRepository.save(entity);
+            }
+        }
+        return check;
+    }
 }
