@@ -74,7 +74,7 @@ public class GalleryController {
     /* 갤러리 글 작성페이지 */
     @GetMapping("/galleryWrite")
     public String galleryWritePage() {
-        return "/gallery/galleryWrite";
+        return "gallery/galleryWrite";
     }
 
     /* 갤러리 글 저장 */

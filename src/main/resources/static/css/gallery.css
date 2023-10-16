@@ -125,7 +125,7 @@
 }
 
 .replyView span {
-    width: 92%;
+    width: 91%;
     height: 37px;
 }
 
@@ -140,6 +140,7 @@
     color: white;
     width: 60px;
     height: 37px;
+    margin-left: 8.5px;
 }
 
 .reply #replySubmit {
@@ -153,7 +154,7 @@
 
 .reply #replyText {
     height: 30px;
-    width: 92%;
+    width: 90%;
 }
 
 #replySubmit:hover { cursor: pointer; }
