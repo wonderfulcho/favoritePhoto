@@ -68,7 +68,7 @@ public class GalleryController {
         model.addAttribute("imageUrls", imageUrls);
 
 
-        return "/gallery/galleryMain";
+        return "gallery/galleryMain";
     }
 
     /* 갤러리 글 작성페이지 */

@@ -33,6 +33,6 @@ public class MarketController {
         model.addAttribute("startPage", page.getNumber() / 10 * 10);
         model.addAttribute("endPage", Math.min(page.getNumber() / 10 * 10 + 9, page.getTotalPages() - 1));
 
-        return "/market/marketMain";
+        return "market/marketMain";
     }
 }

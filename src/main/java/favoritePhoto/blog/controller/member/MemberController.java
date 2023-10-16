@@ -25,7 +25,7 @@ public class MemberController {
     public String joinPage(Model model) {
         // 이메일 중복 검사하기 위해 memberList를 회원가입 페이지에 넘겨준다.
         model.addAttribute("memberList", memberService.memberDTOList());
-        return "/member/join";
+        return "member/join";
     }
 
     @PostMapping("/joinOk")
@@ -36,7 +36,7 @@ public class MemberController {
     @GetMapping("/login")
     public String loginPage(Model model) {
         model.addAttribute("memberList", memberService.memberDTOList());
-        return "/member/login";
+        return "member/login";
     }
 
     @PostMapping("/loginOK")
@@ -63,7 +63,7 @@ public class MemberController {
 
     @GetMapping("/myPage")
     public String myPage() {
-        return "/member/myPage";
+        return "member/myPage";
     }
 
 
