@@ -1,6 +1,7 @@
 package favoritePhoto.blog.service.file;
 
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import favoritePhoto.blog.config.S3Config;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -30,26 +32,20 @@ public class ImageService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    private String localLocation = "/Users/cho/Desktop/blog/src/main/resources/upload";
-
-    public String imageUpload(MultipartRequest request) throws IOException {
-
-        MultipartFile file = request.getFile("upload");
-
+    public String imageUpload(MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
-        String ext = fileName.substring(fileName.indexOf("."));
-
+        String ext = fileName.substring(fileName.lastIndexOf("."));
         String uuidFileName = UUID.randomUUID() + ext;
-        String localPath = localLocation + uuidFileName;
 
-        File localFile = new File(localPath);
-        file.transferTo(localFile);
+        InputStream inputStream = file.getInputStream();
 
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(file.getSize());
 
-        s3Config.amazonS3Client().putObject(new PutObjectRequest(bucket, uuidFileName, localFile).withCannedAcl(CannedAccessControlList.PublicRead));
+        s3Config.amazonS3Client().putObject(bucket, uuidFileName, inputStream, metadata);
+        s3Config.amazonS3Client().setObjectAcl(bucket, uuidFileName, CannedAccessControlList.PublicRead);
+
         String s3Url = s3Config.amazonS3Client().getUrl(bucket, uuidFileName).toString();
-
-        localFile.delete();
 
         return s3Url;
     }
